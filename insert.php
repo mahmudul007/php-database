@@ -1,13 +1,11 @@
 <?php
-include 'dbConnect.php';
-function register($firstName,$lastName,$Dob,$Religion,$Gender,$Email,$presentAdress,$parmanentAdress,$username,$password){
+include 'connection.php';
+ function register($firstName,$lastName,$Dob,$Religion,$Gender,$Email,$presentAdress,$parmanentAdress, $Username,$Password,$Phone){
 
 	$conn = connect();
-	$stmt=$conn->prepare("INSERT INTO USER (firstname,lastname,dob,relegion,gender,email,present_adress,parmanent_adress,username,password) VALUES (?,?)");
-	$stmt -> bind_param("ssssssssss",$firstName,$lastName,$Dob,$Religion,$Gender,$Email,$presentAdress,$parmanentAdress, $Username,$Password);
+	$stmt=$conn->prepare("INSERT INTO USERS (firstname,lastname,dob,relegion,gender,email,present_adress,parmanent_adress,username,password,phone) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+	$stmt -> bind_param("sssssssssss",$firstName,$lastName,$Dob,$Religion,$Gender,$Email,$presentAdress,$parmanentAdress, $Username,$Password,$Phone);
 	
-    return $stmt->execute();
+     return $stmt->execute();
  }
-
-
 ?>

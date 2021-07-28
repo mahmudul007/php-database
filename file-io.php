@@ -10,11 +10,11 @@
 
 
 <?php
-define("filepath", "data.txt");
+include 'insert.php';
 
 
 
-$firstName =$Email= $lastName =$presentAdress=$parmanentAdress=$Phone =$Username=$Password=$Dob=$Religion=$Gender="";
+$firstName=$lastName=$Dob=$Religion=$Gender=$Email=$presentAdress=$parmanentAdress=$Username=$Password=$Phone="";
 $firstNameErr =$emailErr= $lastNameErr=$usernameErr=$passwordErr=$dobErr=$religionErr=$genderErr =$presentaddressErr=$parmanentaddressErr= "";
 $isValid= true;
 $successfulMessage = $errorMessage = "";
@@ -26,7 +26,7 @@ $firstName = $_POST['firstname'];
 $lastName = $_POST['lastname'];
 $Dob=$_POST['dob'];
 $Religion=$_POST['relegion'];
-$Gender=$_POST['gender'];
+isset($_POST['gender']);
 
 $Email=$_POST['email'];
 $presentAdress=$_POST['present_adress'];
@@ -94,16 +94,16 @@ $isValid= false;
 
 
  if ($isValid) {
-         $res=register($firstName,$lastName,$Dob,$Religion,$Gender,$Email,$presentAdress,$parmanentAdress, $Username,$Password);
+         $res=register($firstName,$lastName,$Dob,$Religion,$Gender,$Email,$presentAdress,$parmanentAdress, $Username,$Password,$Phone);
 
          if($res) {
          
-         $successfulMessage = "Sucessfully saved";
-       
+          $successfulMessage = "Sucessfully saved";
+        
+          }
+          else {
+         $errorMessage = "saving error";
          }
-         else {
-        $errorMessage = "saving error";
-        }
        }
 }
 }
@@ -124,10 +124,10 @@ return $data;
 
   
 
-<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" name="file-io" onsubmit="return isValid();">
     <fieldset>
   <legend>Basic Information:</legend>
-    <label for="fname">First name:</label>
+  
 <label for="firstname">First Name<span style="color: red">*</span>: </label>
 <input type="text" name="firstname" id="firstname">
 <span style="color: red"><?php echo $firstNameErr; ?></span>
@@ -199,9 +199,89 @@ return $data;
 <span style="color: green"><?php echo $successfulMessage; ?></span>
 <span style="color: red"><?php echo $errorMessage; ?></span>
 
-
-
-
 <a href="login.php">Go to Login</a>
+
+
+
+<script>
+	function validation(){
+  var firstName=document.getElementById('firstName').value;
+  var lastName=document.getElementById('lastname').value;
+  var dob=document.getElementById('dob').value;
+  var relegion=document.getElementById('relegion').value;
+  var gender=document.getElementById('gender').value;
+  var email=document.getElementById('email').value;
+  var presentAddress=document.getElementById('present_adress').value;
+  var parmanentAddress=document.getElementById('parmanent_adress').value;
+
+
+  var username=document.getElementById('username').value;
+  var password=document.getElementById('password').value;
+  var phone=document.getElementById('phone').value;
+
+  if(firstName == ""){
+ 	document.getElementById("messages").innerHTML ="** please fill the blank";
+ 	return false;
+
+ } 
+  if(lastName == ""){
+ 	document.getElementById("messages").innerHTML ="** please fill the blank";
+ 	return false;
+
+ } 
+  if(dob == ""){
+ 	document.getElementById("messages").innerHTML ="** please fill the blank";
+ 	return false;
+
+ } 
+  if(relegion == ""){
+ 	document.getElementById("messages").innerHTML ="** please fill the blank";
+ 	return false;
+
+ } 
+  if(gender == ""){
+ 	document.getElementById("messages").innerHTML ="** please fill the blank";
+ 	return false;
+
+ } 
+  if(email == ""){
+ 	document.getElementById("messages").innerHTML ="** please fill the blank";
+ 	return false;
+
+ } 
+  if(presentAddress == ""){
+ 	document.getElementById("messages").innerHTML ="** please fill the blank";
+ 	return false;
+
+ } 
+  if(parmanentAddress == ""){
+ 	document.getElementById("messages").innerHTML ="** please fill the blank";
+ 	return false;
+
+ } 
+  if(phone == ""){
+ 	document.getElementById("messages").innerHTML ="** please fill the blank";
+ 	return false;
+
+ } 
+ else if(username == ""){
+ 	document.getElementById("messages2").innerHTML ="** please fill the  username";
+ 	return false;
+
+ }  
+ else if(password == ""){
+ 	document.getElementById("messages3").innerHTML ="** please fill the   password";
+ 	return false;
+
+ }  
+ 
+  
+} 
+
+ 
+ 
+</script>
+
+
 </body>
 </html>

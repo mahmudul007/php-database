@@ -8,7 +8,7 @@
 <body>
     <?php
 
- 
+ include 'dbRead.php';
       $username = $password = "";
       $usernameErr = $passwordErr = "";
       $isValid = true;
@@ -29,12 +29,11 @@
        }
 
        if ($isValid) {
-         $res=true;
+         $res=login($username, $password);
 
          if($res) {
           session_start();
-          $$_SESSION['username'] =$username;
-         $successfulMessage = "Sucessfully logged in.";
+          $_SESSION['username'] =$username;
          header("location:welcome.php");
          }
          else {
@@ -79,7 +78,32 @@
    <p style="color:green" > <?php echo  $successfulMessage;?></p>
   <p style="color: red" > <?php echo  $errorMessage;?>   </p>
   <br>
-  <a href="register">Click to Register</a>
+  <a href="registration.php">Click to Register</a>
+
+
+
+
+
+
+<script>
+  function validation(){
+ var username=document.getElementById('username').value;
+  var password=document.getElementById('password').value;
+  if(username == ""){
+ 	document.getElementById("messages2").innerHTML ="** please fill the  username";
+ 	return false;
+
+ }  
+ else if(password == ""){
+ 	document.getElementById("messages3").innerHTML ="** please fill the   password";
+ 	return false;
+
+ }  
+  }
+
+
+</script>
+
 </body>
 </html>
 
